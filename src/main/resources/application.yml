@@ -1,0 +1,23 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+
+resilience4j:
+  retry:
+    instances:
+      exchangeRateRetry:
+        maxAttempts: 3
+        waitDuration: 200ms
+
+  circuitbreaker:
+    instances:
+      exchangeRateCB:
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        slidingWindowSize: 10
+
+  timelimiter:
+    instances:
+      exchangeRateTimeout:
+        timeoutDuration: 1s
